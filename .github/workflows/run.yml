@@ -6,15 +6,14 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: 0 1 * * *
+    - cron: 0 10 * * *
   watch:
     types: started
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
-
+    if: github.event.repository.owner.id == github.event.sender.id || github.event_name == 'schedule'    
     steps:
       - uses: actions/checkout@v2
       - name: 初始化Python
